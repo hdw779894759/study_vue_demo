@@ -28,7 +28,7 @@ export default {
   computed:{
     // 获取全局变量
     totalPrice() {
-      return this.$store.state.totalPrice;
+      return this.$store.getters.getTotal;
     }
   }
 }

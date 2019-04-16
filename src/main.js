@@ -15,8 +15,17 @@ Vue.config.productionTip = false
 
 // 实例化一个数据中心
 let store = new Vuex.Store({
+
+  // state代表状态集,可存放多个状态
   state: {
     totalPrice: 0
+  },
+
+  // 获取数据集中的数据方法
+  getters: {
+    getTotal(state) {
+      return state.totalPrice
+    }
   },
 
   // 设置动作
@@ -30,7 +39,7 @@ let store = new Vuex.Store({
   },
   // 通过dispatch调用action中的方法来控制mutation方法
   // 需要与后台交互时使用这种方法达到异步请求后台接口的效果
-  actions:{
+  actions: {
     increase(context, price) {
       context.commit('increment', price)
     }
