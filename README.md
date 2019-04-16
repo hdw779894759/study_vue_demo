@@ -1,5 +1,7 @@
 # study_vue_demo
 
+所有内容作为手记帮助自己理解使用，有些说法可能与真实知识点不太一致。望理解！
+
 # 文件结构说明
         大部分开发都在src源码目录下
         index.html默认有一个js入口就是src下的main.js，在其中定义了index.html对应的id为app的Vue实例，
@@ -95,4 +97,38 @@
             },
 
 # 状态管理Vuex
+```js
+// 实例化一个数据中心
+let store = new Vuex.Store({
 
+  // state代表状态集,可存放多个状态
+  state: {
+    totalPrice: 0
+  },
+
+  // 获取数据集中的数据方法
+  getters: {
+    getTotal(state) {
+      return state.totalPrice
+    }
+  },
+
+  // 设置动作
+  mutations: {
+    increment(state, price) {
+      state.totalPrice += price;
+    },
+    decrement(state, price) {
+      state.totalPrice -= price;
+    }
+  },
+  // 通过dispatch调用action中的方法来控制mutation方法
+  // 需要与后台交互时使用这种方法达到异步请求后台接口的效果
+  actions: {
+    increase(context, price) {
+      context.commit('increment', price)
+    }
+  }
+});
+```
+    
