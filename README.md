@@ -136,3 +136,13 @@ let store = new Vuex.Store({
     添加页面的顺序
     1.在pages中添加一个组件，其中公用组件放在components目录下
     2.在路由中新增该页面匹配规则
+
+## VueResource组件的使用过程
+    1.安装组件
+      cnpm install vue-resource --save
+    2.引入组件   
+      import VueResource from 'vue-resource'
+    3.注册组件
+      Vue.use(VueResource)
+    4.使用组件
+      this.$http

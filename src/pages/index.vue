@@ -47,26 +47,45 @@
 
 <script>
 export default {
-  data () {
+  // 当组件创建完成以后请求后台接口获取数据
+  created: function () {
+    // 使用get方法调用
+    this.$http.get('getList')
+      .then(function (data) {
+        console.log(data)
+      },function (error) {
+        console.log(error)
+      })
+
+    // 使用post请求发送请求参数
+    this.$http.post('getList2', {userId: 123})
+      .then(function (data) {
+        console.log(data)
+      }, function (error) {
+        console.log(error)
+      });
+  },
+  data() {
     return {
-      productList:{
-        pc:{
-          title:'PC产品',
-          list:[
+      invTime: 2000,
+      productList: {
+        pc: {
+          title: 'PC产品',
+          list: [
             {
-              name:'数据统计',
-              url:'http://starcraft.com'
-            },{
-              name:'数据预测',
-              url:'http://warcraft.com'
-            },{
-              name:'流量分析',
-              url:'http://overwatch.com',
-              hot:true
+              name: '数据统计',
+              url: 'http://starcraft.com'
+            }, {
+              name: '数据预测',
+              url: 'http://warcraft.com'
+            }, {
+              name: '流量分析',
+              url: 'http://overwatch.com',
+              hot: true
             },
             {
-              name:'广告发布',
-              url:'http://hearstone.com'
+              name: '广告发布',
+              url: 'http://hearstone.com'
             }
           ]
         },
@@ -89,7 +108,75 @@ export default {
             }
           ]
         }
-      }
+      },
+      newsList: [
+        {
+          title: '数据统计',
+          url: 'http://starcraft.com'
+        }, {
+          title: '数据预测',
+          url: 'http://warcraft.com'
+        }, {
+          title: '流量分析',
+          url: 'http://overwatch.com',
+          hot: true
+        }, {
+          title: '广告发布',
+          url: 'http://hearstone.com'
+        }
+      ],
+      boardList: [
+        {
+          title: '开放产品',
+          description: '开放产品是一款开放产品',
+          id: 'car',
+          toKey: 'analysis',
+          saleout: false
+        },
+        {
+          title: '品牌营销',
+          description: '品牌营销帮助你的产品更好地找到定位',
+          id: 'earth',
+          toKey: 'count',
+          saleout: false
+        },
+        {
+          title: '使命必达',
+          description: '使命必达快速迭代永远保持最前端的速度',
+          id: 'loud',
+          toKey: 'forecast',
+          saleout: true
+        },
+        {
+          title: '勇攀高峰',
+          description: '帮你勇闯高峰，到达事业的顶峰',
+          id: 'hill',
+          toKey: 'publish',
+          saleout: false
+        }
+      ],
+      slides: [
+        {
+          src: require('../assets/slideShow/pic1.jpg'),
+          title: 'xxx1',
+          href: 'detail/analysis'
+        },
+        {
+          src: require('../assets/slideShow/pic2.jpg'),
+          title: 'xxx2',
+          href: 'detail/count'
+        },
+        {
+          src: require('../assets/slideShow/pic3.jpg'),
+          title: 'xxx3',
+          href: 'http://xxx.xxx.com'
+        },
+        {
+          src: require('../assets/slideShow/pic4.jpg'),
+          title: 'xxx4',
+          href: 'detail/forecast'
+        }
+      ]
     }
   }
 }

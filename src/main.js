@@ -5,11 +5,13 @@ import Vue from 'vue'
 import Layout from './components/layout'
 import VueRouter from 'vue-router'
 import IndexPage from './pages/index'
+import VueResource from 'vue-resource'
 
 // 注册组件
-Vue.use(VueRouter)
+Vue.use(VueRouter)    // 注册路由
+Vue.use(VueResource)  // 注册请求资源
 
-// 实例化组件
+// 实例化路由组件
 let router = new VueRouter({
   mode: 'history',
   routes:[
