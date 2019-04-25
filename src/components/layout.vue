@@ -20,7 +20,7 @@
     <!--中间的内容使用路由-->
     <div class="app-content">
       <keep-alive>
-        <router-view></router-view>
+         <router-view></router-view>
       </keep-alive>
     </div>
     <div class="app-foot">

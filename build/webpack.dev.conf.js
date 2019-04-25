@@ -93,3 +93,15 @@ module.exports = new Promise((resolve, reject) => {
     }
   })
 })
+
+// jsonServer初始化
+var jsonServer = require('json-server')
+var apiServer = jsonServer.create()
+var apiRouter = jsonServer.router('db.json')
+var middlewares = jsonServer.defaults()
+
+apiServer.use(middlewares)
+apiServer.use(apiRouter)
+apiServer.listen(3000, function () {
+  console.log('JSON Server is running')
+});

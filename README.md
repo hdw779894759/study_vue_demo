@@ -146,3 +146,25 @@ let store = new Vuex.Store({
       Vue.use(VueResource)
     4.使用组件
       this.$http
+
+## json-server组件的使用
+        该组件可以在前端人员开发时通过自己造数据模拟后端接口返回的数据来完成自己的工作。
+    不需要等待后台接口完成后才能完成自己的开发工作，只需要提前根据前后端数据接口协议
+    规范来造假数据，将json串写在文件中。
+    1.安装组件
+      cnpm install json-server --save
+    2.webpack.dev.conf.js文件中引入json-server配置
+      // jsonServer初始化
+      var jsonServer = require('json-server')
+      var apiServer = jsonServer.create()
+      var apiRouter = jsonServer.router('db.json')
+      var middlewares = jsonServer.defaults()
+      
+      apiServer.use(middlewares)
+      apiServer.use(apiRouter)
+      apiServer.listen(3000, function () {
+        console.log('JSON Server is running')
+      });
+    3.直接启动项目即可
+      访问json-server页面
+      http://localhost:3000
