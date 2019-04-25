@@ -46,16 +46,24 @@
 </template>
 
 <script>
+  // 引入slideShow子组件
+  import slideShow from '../components/slideShow'
+
 export default {
+    // 声明组件之后才能在父组件中使用子组件
+  components: {slideShow},
   // 当组件创建完成以后请求后台接口获取数据
   created: function () {
     // 使用get方法调用
-    this.$http.get('getList')
-      .then(function (data) {
-        console.log(data)
-      },function (error) {
+    this.$http.get('api/getNewsList')
+    //.then(function (res) {
+      // 开放this的作用于不限制在res返回的函数里，而是vue实例的作用域
+      .then((res) => {
+        this.newsList = res.data
+        console.log(res.data)
+      }, (error) =>{
         console.log(error)
-      })
+      });
 
     // 使用post请求发送请求参数
     this.$http.post('getList2', {userId: 123})
@@ -109,22 +117,8 @@ export default {
           ]
         }
       },
-      newsList: [
-        {
-          title: '数据统计',
-          url: 'http://starcraft.com'
-        }, {
-          title: '数据预测',
-          url: 'http://warcraft.com'
-        }, {
-          title: '流量分析',
-          url: 'http://overwatch.com',
-          hot: true
-        }, {
-          title: '广告发布',
-          url: 'http://hearstone.com'
-        }
-      ],
+      // 通过后台接口返回数据，初始化为空数据
+      newsList: [],
       boardList: [
         {
           title: '开放产品',
@@ -157,6 +151,7 @@ export default {
       ],
       slides: [
         {
+          // 当图片通过js引入到模板里时需要使用require
           src: require('../assets/slideShow/pic1.jpg'),
           title: 'xxx1',
           href: 'detail/analysis'

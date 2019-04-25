@@ -9,6 +9,7 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    // 配置代理服务路径
     proxyTable: {
       '/api/':'http://localhost:3000/'
     },

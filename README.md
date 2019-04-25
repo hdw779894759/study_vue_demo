@@ -174,3 +174,6 @@ let store = new Vuex.Store({
            '/api/':'http://localhost:3000/'
          }
       【配置说明】访问/api/路径时走该ip访问
+    5.配置统一的接口路径
+    // 为db.json中接口增加统一的/api前缀
+    apiServer.use('/api',apiRouter)
