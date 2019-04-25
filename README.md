@@ -9,7 +9,7 @@
         App.vue作为根组件同时又通过components参数引入了HelloWorld组件，并通过import导入的方式指明该组件
     的来源在components目录下，而components目录就是存放所有组件的文件夹。
         assets文件表示配件，存放一些图片资源等。
-        config目录和build目录为一些配置。
+        config目录和build目录为一些配置文件目录。
         
 # vue文件说明
         export 表示输出，后面必须跟default，这样才能引入默认文件夹components的其他组件

@@ -101,7 +101,8 @@ var apiRouter = jsonServer.router('db.json')
 var middlewares = jsonServer.defaults()
 
 apiServer.use(middlewares)
-apiServer.use(apiRouter)
+// 为db.json中接口增加统一的/api前缀
+apiServer.use('/api',apiRouter)
 apiServer.listen(3000, function () {
   console.log('JSON Server is running')
 });
