@@ -168,3 +168,9 @@ let store = new Vuex.Store({
     3.直接启动项目即可
       访问json-server页面
       http://localhost:3000
+    4.对所有接口添加代理配置
+       /config/index.js的dev节点下增加如下配置
+      proxyTable: {
+           '/api/':'http://localhost:3000/'
+         }
+      【配置说明】访问/api/路径时走该ip访问

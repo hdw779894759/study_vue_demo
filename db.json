@@ -28,5 +28,18 @@
       "toKey": "publish",
       "saleout": false
     }
+  ],
+
+  "getNewsList": [
+    {
+      "title": "新闻条目1",
+      "url:": "http://starcraft.com"
+    } ,{
+      "title": "新闻条目2",
+      "url:": "http://starcraft.com"
+    } ,{
+      "title": "新闻条目3",
+      "url:": "http://starcraft.com"
+    }
   ]
 }
