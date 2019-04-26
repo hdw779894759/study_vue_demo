@@ -74,6 +74,7 @@ export default {
         this.nowIndex = index
         // 子组件向父组件交互，触发自定义事件
         this.$emit('onchange',index)
+
       },10);
     },
     runInv() {
