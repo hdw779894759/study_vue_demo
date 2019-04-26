@@ -26,7 +26,8 @@
       </div>
     </div>
     <div class="index-right">
-      <slide-show :slides="slides" :inv="invTime"></slide-show>
+      <!-- 父组件通过 :字段名 的方式向子组件传递参数，子组件通过props中的参数声明来接收 -->
+      <slide-show :slides="slides" :inv="slideSpeed" @onchange="doSomethingOnSlideChange"></slide-show>
       <div class="index-board-list">
         <div
           class="index-board-item"
@@ -73,9 +74,14 @@ export default {
         console.log(error)
       });
   },
+  methods:{
+    doSomethingOnSlideChange() {
+      console.log('doSomethingOnSlideChange run!')
+    }
+  },
   data() {
     return {
-      invTime: 2000,
+      slideSpeed: 2000,
       productList: {
         pc: {
           title: 'PC产品',

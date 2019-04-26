@@ -1,15 +1,20 @@
 <template>
-    <div class="slide-show">
+    <div class="slide-show" @mouseover="clearInv" @mouseout="runInv">
       <div class="slide-img">
         <a :href="slides[nowIndex].href">
-          <img :src="slides[nowIndex].src">
+          <transition name="slide-trans">
+            <img v-if="isShow" :src="slides[nowIndex].src">
+          </transition>
+          <transition name="slide-trans-old">
+            <img v-if="!isShow" :src="slides[nowIndex].src">
+          </transition>
         </a>
       </div>
       <h2>{{slides[nowIndex].title}}</h2>
       <ul class="slide-pages">
         <li @click="goto(prevIndex)">&lt;</li>
         <li v-for="item,index in slides" @click="goto(index)">
-          <a>{{index+1}}</a>
+          <a :class="{on: index===nowIndex}">{{index+1}}</a>
         </li>
         <li @click="goto(nextIndex)">&gt;</li>
       </ul>
@@ -24,11 +29,16 @@ export default {
       // 设置属性slides的类型和默认值
       type:Array,
       default:[]
+    },
+    inv:{
+      type: Number,
+      default: 1000
     }
   },
   data() {
     return{
-      nowIndex:0
+      nowIndex:0,
+      isShow:true
     }
   },
 
@@ -56,8 +66,31 @@ export default {
 
   methods:{
     goto(index) {
-      this.nowIndex = index;
+      // 先隐藏
+      this.isShow = false
+      // 再显示
+      setTimeout(() => {
+        this.isShow = true
+        this.nowIndex = index
+        // 子组件向父组件交互，触发自定义事件
+        this.$emit('onchange',index)
+      },10);
     },
+    runInv() {
+      this.invId = setInterval(() => {
+        this.goto(this.nextIndex)
+      },this.inv);
+    },
+
+    // 当鼠标放在幻灯片上时，不让其自动翻页
+    clearInv() {
+      clearInterval(this.invId);
+    }
+  },
+
+  // 组件渲染完毕以后运行方法
+  mounted() {
+    this.runInv()
   }
 }
 </script>
