@@ -11,7 +11,7 @@
             <li class="nav-pile">|</li>
             <li>注册</li>
             <li class="nav-pile">|</li>
-            <li>关于</li>
+            <li @click="aboutClick">关于</li>
           </ul>
         </div>
       </div>
@@ -26,15 +26,24 @@
     <div class="app-foot">
       <p>©2019 vueDemo - David Han</p>
     </div>
+    <my-dialog :is-show="isSHowDialog">other hello</my-dialog>
   </div>
 </template>
 
 <script>
+  import Dialog from './dialog'
 export default {
+  components:{
+    MyDialog:Dialog
+  },
   data () {
     return {
-      msg: 'i am apple',
-      price: 5
+      isSHowDialog:false
+    }
+  },
+  methods:{
+    aboutClick() {
+      this.isSHowDialog = true;
     }
   }
 }
