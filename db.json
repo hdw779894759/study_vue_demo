@@ -41,5 +41,9 @@
       "title": "新闻条目3",
       "url:": "http://starcraft.com"
     }
-  ]
+  ],
+  "login": {
+    "username":"yudongdnog",
+    "userId": 123123
+  }
 }

@@ -7,9 +7,13 @@
         <img src="../assets/logo.png">
         <div class="head-nav">
           <ul class="nav-list">
-            <li>登录</li>
+            <li> {{ username }} </li>
+            <li v-if="username!==''" class="nav-pile">|</li>
+            <li v-if="username!==''" class="nav-pile">退出</li>
+
+            <li v-if="username===''" @click="logClick">登录</li>
             <li class="nav-pile">|</li>
-            <li>注册</li>
+            <li v-if="username===''" @click="regClick">注册</li>
             <li class="nav-pile">|</li>
             <li @click="aboutClick">关于</li>
           </ul>
@@ -26,24 +30,56 @@
     <div class="app-foot">
       <p>©2019 vueDemo - David Han</p>
     </div>
-    <my-dialog :is-show="isSHowDialog">other hello</my-dialog>
+    <my-dialog :is-show="isSHowAboutDialog" @on-close="closeDialog('isSHowAboutDialog')">
+      <p>“厉害了，扬灵团队成员全部考上研究生了!” 近日， 随着2019年博士和硕士研究生录取结果的先后公布，经济贸易学院“扬灵团队”5名团队毕业生全部“上岸”的消息迅速传遍学院，引来众多师生热议，团队成为了学院里名副其实的“明星团队”。
+
+        据悉，该团队2016级农村与区域发展专业硕士研究生杨绍闻同学被南京航空航天大学录取为博士研究生，2015级苏子超、杨晓松、周雪莹、刘艺航四名本科生分别被广州大学、福州大学、郑州大学、湖北省社会科学院录取为硕士研究生。</p>
+    </my-dialog>
+    <my-dialog :is-show="isSHowLogDialog" @on-close="closeDialog('isSHowLogDialog')">
+      <log-form @has-log="onSuccessLog"></log-form>
+    </my-dialog>
+    <my-dialog :is-show="isSHowRegDialog" @on-close="closeDialog('isSHowRegDialog')">
+      <reg-form></reg-form>
+    </my-dialog>
   </div>
 </template>
 
 <script>
   import Dialog from './dialog'
+  import LogForm from './LogForm'
+  import RegForm from './regForm'
 export default {
   components:{
-    MyDialog:Dialog
+    MyDialog:Dialog,
+    LogForm,
+    RegForm
   },
   data () {
     return {
-      isSHowDialog:false
+      isSHowAboutDialog:false,
+      isSHowLogDialog:false,
+      isSHowRegDialog:false,
+      username:''
     }
   },
   methods:{
     aboutClick() {
-      this.isSHowDialog = true;
+      this.isSHowAboutDialog = true
+    },
+
+    logClick() {
+    this.isSHowLogDialog = true
+    },
+
+    regClick() {
+    this.isSHowRegDialog = true
+
+    },
+    closeDialog(attr) {
+      this[attr] = false;
+    },
+    onSuccessLog(data) {
+      this.name = data.username
     }
   }
 }

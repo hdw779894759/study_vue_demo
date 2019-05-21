@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div class="dialog-wrap" v-if="isShow">
-      <div class="dialog-cover" v-if="isShow" @click="closeMyself">
-
-      </div>
-      <div class="dialog-content" v-if="isShow">
-        <p class="dialog-close" @click="closeMyself">
-          x
-        </p>
-        <slot>empty</slot>
-      </div>
+    <div class="dialog-wrap">
+      <div class="dialog-cover" v-if="isShow" @click="closeMyself"></div>
+      <transition name="drop">
+        <div class="dialog-content" v-if="isShow">
+          <p class="dialog-close" @click="closeMyself">
+            x
+          </p>
+          <slot>empty</slot>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -22,6 +22,14 @@ export default {
       default: true
     }
   },
+  data() {
+    return {}
+  },
+  methods:{
+    closeMyself() {
+      this.$emit('on-close')
+    }
+  }
 }
 </script>
 
